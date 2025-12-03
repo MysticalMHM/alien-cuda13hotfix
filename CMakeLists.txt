@@ -1,5 +1,6 @@
 
 cmake_minimum_required(VERSION 3.17 FATAL_ERROR)
+cmake_policy(SET CMP0079 NEW)
 
 # Using the vcpkg submodule
 set(CMAKE_TOOLCHAIN_FILE external/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "")
