@@ -2,6 +2,9 @@
 <a href="https://alien-project.org" target="_blank">ALIEN - Explore worlds of artificial life</a>
 </h1>
 
+> [!IMPORTANT]
+> see branch `cuda13hotfix` for changes
+
 ![Preview](https://github.com/user-attachments/assets/ee578848-7dd7-458d-873f-89662a7c15f0)
 
 <p>
