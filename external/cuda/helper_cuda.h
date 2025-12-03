@@ -27,8 +27,6 @@
 #define EXIT_WAIVED 2
 #endif
 
-// stupid: #define CUDA_INIT_LEGACY_VALUES int legacyCudaComputeMode;cudaDeviceGetAttribute(&legacyCudaComputeMode, cudaDevAttrComputeMode, devID);int legacyClockRate;cudaDeviceGetAttribute(&legacyClockRate,cudaDevAttrClockRate,devID);
-
 // Note, it is required that your SDK sample to include the proper header files, please
 // refer the CUDA examples for examples of the needed CUDA headers, which may change depending
 // on which CUDA functions are used.
@@ -1102,23 +1100,6 @@ inline int gpuDeviceInit(int devID)
     cudaDeviceProp deviceProp;
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, devID));
     
-    /*switch (cudaComputeMode) {
-      case cudaComputeModeDefault:
-        legacyCudaComputeMode = 0;
-        break;
-      case cudaComputeModeExclusive:
-        legacyCudaComputeMode = 1;
-        break;
-      case cudaComputeModeProhibited:
-        legacyCudaComputeMode = 2;
-        break;
-      case cudaComputeModeExclusiveProcess:
-        legacyCudaComputeMode = 3;
-        break;
-      default:
-        fprintf(stderr, "Error: cudaDeviceProp.cudaComputeMode is not a value of it's enum (how did this happen?)\n");
-        break;
-    }*/
 
     int legacyClockRate;
     cudaDeviceGetAttribute(&legacyClockRate, cudaDevAttrClockRate, devID);
@@ -1154,6 +1135,11 @@ inline int gpuGetMaxGflopsDeviceId()
     unsigned long long max_compute_perf = 0;
     cudaDeviceProp deviceProp;
     cudaGetDeviceCount(&device_count);
+
+    int legacyClockRate;
+    cudaDeviceGetAttribute(&legacyClockRate, cudaDevAttrClockRate, current_device);
+    int legacyCudaComputeMode;
+    cudaDeviceGetAttribute(&legacyCudaComputeMode, cudaDevAttrComputeMode, current_device);
     
     checkCudaErrors(cudaGetDeviceCount(&device_count));
 

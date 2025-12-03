@@ -88,10 +88,13 @@ Note: The `--recursive` parameter is necessary to check out the vcpkg submodule 
 ### Build instructions
 Prerequisites: [CUDA Toolkit 11.2+](https://developer.nvidia.com/cuda-downloads) and a toolchain for CMake (e.g. GCC 9.x+ or [MSVC v142+](https://visualstudio.microsoft.com/vs/)).
 
+Before you build, you need to insert `"-DCMAKE_POLICY_VERSION_MINIMUM=3.5"` after line 248 in `external/vcpkg/scripts/cmake/vcpkg_configure_cmake.cmake`
+and modify lines 40 and 878 in `external/vcpkg/scripts/buildsystems/vcpkg.cmake` to be `cmake_policy(VERSION 3.7.2...3.10)`
+
 Build steps:
 ```
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=native
 cmake --build . --config Release -j8
 ```
 If everything goes well, the ALIEN executable can be found under the build directory in `./alien` or `.\Release\alien.exe` depending on the used toolchain and platform.
